@@ -1,0 +1,28 @@
+﻿@model Staff.WebApp.Models.EmployeeModel
+@{
+    ViewData["Title"] = "Update employee";
+}
+
+@if (Model == null)
+{
+    <h4>Employee not found</h4>
+}
+else
+{
+    <h4>Enter employee data</h4>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @await Html.PartialAsync("EmployeeCard", Model)
+
+        <div class="form-group" style="margin-top:30px;">
+            <input type="submit" value="Update" class="btn btn-default" />
+            <input type="submit" value="Cancel" onclick="window.history.go(-1); return false;" class="btn" />
+        </div>
+    }
+}
+@section Scripts{
+    <script>
+
+    </script>
+}  

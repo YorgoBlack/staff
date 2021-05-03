@@ -1,0 +1,17 @@
+﻿@model Staff.WebApp.Models.EmployeeModel
+@{
+    ViewData["Title"] = "Add employee";
+}
+
+<h4>Enter employee data</h4>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @await Html.PartialAsync("EmployeeCard", Model)
+
+    <div class="form-group" style="margin-top:30px;">
+        <input type="submit" value="Create" class="btn btn-default" />
+        <input type="submit" value="Cancel" onclick="window.history.go(-1); return false;" class="btn" />
+    </div>
+}
+

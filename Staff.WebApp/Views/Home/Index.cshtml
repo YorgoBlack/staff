@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Staff.WebApp.Models.EmployeeModel>
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<h4>Employees</h4>
+@Html.ActionLink("Add employee", "Add", "Home", null, new { @style = "float:right" })
+<table class="table">
+    <tr>
+        <th>
+            Employee
+        </th>
+        <th>
+            Age
+        </th>
+        <th>
+            Gender
+        </th>
+        <th>
+            Department
+        </th>
+        <th>
+            Experience
+        </th>
+        <th>
+            &nbsp;
+        </th>
+
+    </tr>
+    @if (Model != null)
+    {
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenderName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExperiencesNames)
+            </td>
+            <td>
+                @Html.ActionLink("Update", "Update","Home", new { id = item.Id } )
+                @Html.ActionLink("Delete", "Delete", "Home", new { id = item.Id } )
+            </td>
+
+
+        </tr>
+        }
+    }
+</table>

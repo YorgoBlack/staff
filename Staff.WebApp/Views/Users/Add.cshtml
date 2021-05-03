@@ -1,0 +1,57 @@
+﻿@model Staff.WebApp.Models.AppUsersModel
+@{
+    ViewData["Title"] = "Add user";
+}
+
+<h4>Enter user</h4>
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", style = "width: 200px" } })
+        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", style = "width: 200px" } })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.PasswordConfirm, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.PasswordConfirm, new { htmlAttributes = new { @class = "form-control", style = "width: 200px" } })
+        @Html.ValidationMessageFor(model => model.PasswordConfirm, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group" style="margin-top:30px;">
+        <input type="submit" value="Create" class="btn btn-default" />
+    </div>
+}
+
+<br />
+<hr>
+<h4>Available users (for change current user clear browser history)</h4>
+
+@if (Model.Users != null)
+{
+    <table>
+        @foreach (var u in Model.Users)
+        {
+            <tr>
+                <td width="100">
+                    @Html.Raw(u.UserName)
+                </td>
+                <td width="200">
+                    @Html.Raw(u.LastActionTime.ToString() )
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", "Users", new { id = u.Id })
+                </td>
+            </tr>
+        }
+    </table>
+
+}
+
